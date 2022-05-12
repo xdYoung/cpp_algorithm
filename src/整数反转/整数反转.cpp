@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -15,10 +16,14 @@ public:
         while(x != 0){
             // 每次取末尾数字
             int tmp = x % 10;
-            // 判断是否大于最大32位整数
-            if(res > pow(2, 31)/10 || res == pow(2, 31)/10 && tmp > 7) return 0;
-            // 判断是否小于最小32位整数
-            if(res < -pow(2, 31)/10 || res == -pow(2, 31)/10 && tmp < -8) return 0;
+            // // 判断是否大于最大32位整数
+            // if(res > pow(2, 31)/10 || res == pow(2, 31)/10 && tmp > 7) return 0;
+            // // 判断是否小于最小32位整数
+            // if(res < -pow(2, 31)/10 || res == -pow(2, 31)/10 && tmp < -8) return 0;
+
+            // 当x位正数并且和Integer.MAX_VALUE的位数相等时首位最大只能为2，所以逆转后不会出现
+            // res = Integer.MAX_VALUE/10 && tmp>2的情况，反之负数情况也一样
+            if(res > INT32_MAX/10 || res < INT32_MIN/10) return 0;
             res = res*10 + tmp;
             x /= 10;
         }
