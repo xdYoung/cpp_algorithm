@@ -11,7 +11,7 @@ using namespace std;
 
 class Solution{
 public:
-    int reverse_int(int &x){
+    int reverse_int(int x){
         int res = 0;
         while(x != 0){
             // 每次取末尾数字
