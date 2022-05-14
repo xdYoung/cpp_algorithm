@@ -70,10 +70,10 @@ namespace test{
 }
 using namespace test;
 
-// 暴力解法
 class Solution{
 public:
-    int strStr(string haystack, string needle){
+    // 暴力解法
+    int strStr01(string haystack, string needle){
         int n = haystack.length(), m = needle.length();
         if(m == 0) {
             cout << "匹配字符串为空，返回0！" << endl;
@@ -91,8 +91,41 @@ public:
         }
         return -1;
     }
+    // KMP算法
+    // 创建next数组并初始化
+    void getNext(int* next, const string& s){
+        int j = 0;
+        next[0] = 0;
+        for(int i = 1; i < s.size(); i++){
+            while(j>0 && s[i] != s[j]){
+                j = next[j - 1];
+            }
+            if(s[i] == s[j]){
+                j++;
+            }
+            next[i] = j;
+        }
+    }
+    int strStr02(string haystack, string needle){
+        if(needle.size() == 0) return 0;
+        int next[needle.size()];
+        getNext(next, needle);
+        int j = 0;
+        for(int i = 0; i < haystack.size(); i++){
+            while(j > 0 && i < haystack[i] != needle[j]){
+                j = next[j - 1];
+            }
+            if(haystack[i] == needle[j]){
+                j++;
+            }
+            if(j == needle.size()){
+                return (i - needle.size() + 1);
+            }
+        }
+        return -1;
+    }
 };
-
+// 暴力解法测试
 void test02(){
     Solution s;
     cout << "请输入原字符串：\n";
@@ -106,13 +139,33 @@ void test02(){
     cout << "原字符串：" << s1 << endl;
     cout << "匹配字符串：" << s2 << endl;
     int pos;
-    pos = s.strStr(s1, s2);
+    pos = s.strStr01(s1, s2);
     cout << (pos>0 ? "找到！下标为："+to_string(pos) : "未找到！") << endl;
     
+}
+// KMP算法测试
+void test03(){
+    Solution s;
+    cout << "请输入原字符串：\n";
+    string s1;
+    // getline(istream &is, string str)
+    getline(cin, s1);
+    cout << "请输入匹配字符串：\n";
+    string s2;
+    getline(cin, s2);
+    system("clear");
+    cout << "原字符串：" << s1 << endl;
+    cout << "匹配字符串：" << s2 << endl;
+    int pos;
+    pos = s.strStr02(s1, s2);
+    cout << pos << endl;
+    cout << (pos>0 ? "找到！下标为："+to_string(pos) : "未找到！") << endl;
+
 }
 
 int main(){
     // test01();
-    test02();
+    // test02();
+    test03();
     return 0;
 }
