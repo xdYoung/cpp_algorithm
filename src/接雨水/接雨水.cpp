@@ -17,16 +17,21 @@ class Solution{
 public:
     // 暴力解法：
     int trap01(vector<int> height){
-        int ans = 0;
+        int ans = 0;    // answer:ans为总的接雨水的量
         int len = height.size();
+        // 循环不包含取第一个和最后一个数。因为没意义。
         for(int i = 1; i < len - 1; i++){
             int max_left = 0, max_right = 0;
+            // 向左遍历，获取左边最大的高度，最后的最大高度不小于height[i]，因为从i开始循环的。
             for(int j = i; j >= 0 ; j--){
                 max_left = max(max_left, height[j]);
             }
+            // 向右遍历，获取右边最大的高度，最后的最大高度不小于height[i]，因为从i开始循环的。
             for(int k = i; k < len; k++){
                 max_right = max(max_right, height[k]);
             }
+            // 每循环一次，取左边和右边的最小值减去当前循环的i的高度，即为当前i的高度能装多少水。
+            // 然后累加到ans上。
             ans += min(max_left, max_right) - height[i];
         }
         return ans;
