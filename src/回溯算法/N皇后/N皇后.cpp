@@ -13,6 +13,7 @@ using namespace std;
     皇后的走法是：可以横走，直走，斜走，格数不限。因此要求皇后彼此之间不能相互攻击，
     等价于要求任何两个皇后都不能在同一行、同一列以及同一条斜线上。aa
 */
+
 namespace printFunc{
     void printVector(const vector<string>& v){
         for(vector<string>::const_iterator it = v.begin(); it != v.end(); it++){

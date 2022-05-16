@@ -6,7 +6,9 @@ using namespace std;
     给定两个整数n和k，返回范围[1,n]中所有可能的k个数的组合。
     可按任意顺序返回答案
 */
-void printVector(const vector<vector<int> > v2){
+// 剪枝+回溯优化
+
+void printVector(const vector<vector<int> >& v2){
     for(vector<vector<int> >::const_iterator it = v2.begin(); it != v2.end(); it++){
         for(vector<int>::const_iterator vit = it->begin(); vit != it->end(); vit++){
             cout << *vit << " ";
@@ -23,11 +25,19 @@ private:
     void backstacking(int n, int k, int startIndex){
         if(result.size() == k){
             results.push_back(result);
+            return;
         }
-        for(int i = startIndex; i <= n; i++){
-            result.push_back(i);    // 处理结点
+        /*
+        // 循环的次数根据k值决定的：(剪枝优化)
+            // 已经选取的元素个数：result.size();
+            // 还需要的元素个数：k - result.size();
+            // 在每一层，集合n中至多需要从起始位置遍历到：(n - (k - result.size())) + 1 这个次数。
+            // +1是因为包括起始位置，左闭的集合。
+        */
+        for(int i = startIndex; i <= n - (k - result.size()) + 1; i++){   // 剪枝优化
+            result.push_back(i);    // 处理节点
             backstacking(n, k, i+1);   // 递推
-            result.pop_back();  // 回溯，报销处理的结点
+            result.pop_back();  // 回溯，报销处理的节点
         }
     }
 public:
