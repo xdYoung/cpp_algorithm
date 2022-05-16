@@ -29,7 +29,7 @@ void printVector(const vector<string>& v){
 
 class Solution{
 private:
-    const string letterMap[11] = {
+    const string letterMap[10] = {
         "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     vector<string> result;
     string s;
@@ -63,7 +63,7 @@ void test01(){
     string digits;
     cout << "请输入电话号码：";
     cin >> digits;
-    cout << digits << endl;
+    // cout << digits << endl;
     printVector(s.letterCombination(digits));
 }
 
