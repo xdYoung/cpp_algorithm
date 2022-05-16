@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 using namespace std;
 
@@ -8,12 +9,27 @@ using namespace std;
 */
 // 剪枝+回溯优化
 
+string toString(int n){
+    if(n < 10){
+        return "   " + to_string(n);
+    }else if(n<100){
+        return "  " + to_string(n);
+    }else if(n<100){
+        return " " + to_string(n);
+    }else{
+        return to_string(n);
+    }
+}
+
 void printVector(const vector<vector<int> >& v2){
+    int count = 1;
     for(vector<vector<int> >::const_iterator it = v2.begin(); it != v2.end(); it++){
+        cout << toString(count) << ": ";
         for(vector<int>::const_iterator vit = it->begin(); vit != it->end(); vit++){
-            cout << *vit << " ";
+            cout << toString(*vit) << " ";
         }
         cout << endl;
+        count++;
     }
 }
 

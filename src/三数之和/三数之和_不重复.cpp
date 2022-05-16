@@ -38,7 +38,7 @@ public:
         int cnt = 0;
         for(int first = 0; first < N; ++first){
             if(v[first] == v[first-1]) continue;
-            // 如何排序后第一个数都大于0了，则三数相加结果不可能为0；后续则不需要再循环了
+            // 如果排序后第一个数都大于0了，则三数相加结果不可能为0；后续则不需要再循环了
             if(v[first] > 0) break;
             int third = N - 1;
             int target = -v[first];
