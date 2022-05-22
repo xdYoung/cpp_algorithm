@@ -2,16 +2,23 @@
 #include <string>
 using namespace std;
 
+/* 题目说明：
+    给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+    示例 1: 输入: s = "anagram", t = "nagaram" 输出: true
+    示例 2: 输入: s = "rat", t = "car" 输出: false
+    说明: 你可以假设字符串只包含小写字母。  
+*/
+
 class Solution{
 public:
-    bool isAnagram(string s1, string s2){
+    bool isAnagram(string s1, string t){
         int record[26] = {0};
         for(int i = 0; i < s1.size(); i++){
             // 并不需要记住字符a的ASCII，只要求出一个相对数值就可以了
             record[s1[i] - 'a']++;
         }
-        for(int i = 0; i < s2.size(); i++){
-            record[s2[i] - 'a']--;
+        for(int i = 0; i < t.size(); i++){
+            record[t[i] - 'a']--;
         }
         for(int i = 0; i < 26; i++){
             // record数组如果有的元素不为零0，说明字符串s1和s2 一定是谁多了字符或者谁少了字符。
