@@ -22,7 +22,7 @@ private:
         traversal(cur->right, v);   // 右
     }
 public:
-    vector<int> preorderTraversal(TreeNode* root){
+    vector<int> inorderTraversal(TreeNode* root){
         vector<int> result;
         traversal(root, result);
         return result;

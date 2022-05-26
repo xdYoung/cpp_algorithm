@@ -22,7 +22,7 @@ private:
         v.push_back(cur->val);        // 中
     }
 public:
-    vector<int> preorderTraversal(TreeNode* root){
+    vector<int> postorderTraversal(TreeNode* root){
         vector<int> result;
         traversal(root, result);
         return result;
